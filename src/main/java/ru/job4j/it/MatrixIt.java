@@ -19,7 +19,7 @@ public class MatrixIt implements Iterator<Integer> {
         if (row + 1 == data.length) {
             return column < data[row].length;
         }
-        return row < data.length;
+        return column < data[row + 1].length;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class MatrixIt implements Iterator<Integer> {
     }
 
     public static void main(String[] args) {
-        int[][] in = {{}, {}, {}};
-        System.out.println(Arrays.deepToString(in));
+        int[] in = {};
+        System.out.println(in.length);
     }
 }
