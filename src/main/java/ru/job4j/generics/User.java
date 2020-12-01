@@ -1,14 +1,14 @@
 package ru.job4j.generics;
 
-public class User {
+public class User extends Base {
     private String id;
-    private String name;
-    private int age;
 
+    protected User(String id) {
+        super(id);
+    }
 
-//    public User(String name, int age) {
-//        super();
-//        this.name = name;
-//       this.age = age;
-//    }
+    @Override
+    public String getId() {
+        return id;
+    }
 }

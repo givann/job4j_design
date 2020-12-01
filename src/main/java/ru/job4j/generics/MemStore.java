@@ -9,21 +9,30 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public void add(T model) {
-
+        mem.add(model);
     }
 
     @Override
     public boolean replace(String id, T model) {
+        mem.set(Integer.parseInt(id), model);
+        if (mem.get(Integer.parseInt(id)).equals(model)) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean delete(String id) {
+        int sizeM = mem.size();
+        mem.remove(Integer.parseInt(id));
+        if (mem.size() == sizeM - 1) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public T findById(String id) {
-        return null;
+        return mem.get(Integer.parseInt(id));
     }
 }
