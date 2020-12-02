@@ -1,8 +1,8 @@
 package ru.job4j.generics;
 
-public class User extends Base {
+public class Rol extends Base {
 
-    protected User(String id) {
+    protected Rol(String id) {
         super(id);
     }
 

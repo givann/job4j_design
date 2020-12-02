@@ -15,25 +15,24 @@ public class SimpleArray<T> implements Iterable<Object> {
     }
 
     public boolean add(T model) {
-        for (int i = 0; i < arr.length; i++) {
-            if (i == position) {
-                arr[i] = model;
-                position++;
-                return true;
-            }
+        if (position == arr.length) {
+            return false;
+        } else {
+            arr[position++] = model;
         }
-        return false;
+        return true;
     }
 
     @SuppressWarnings("unchecked")
     public T set(int index, T model) {
-        Objects.checkIndex(index, arr.length);
+        Objects.checkIndex(index, position);
         arr[index] = model;
         return (T) arr[index];
     }
 
     public boolean remove(int index) {
         Object[] dest = new Object[arr.length - 1];
+        Objects.checkIndex(index, position);
         if (index < arr.length) {
             System.arraycopy(arr, 0, dest, 0, index);
             System.arraycopy(arr, index + 1, dest, index, arr.length - (index + 1));
@@ -46,6 +45,7 @@ public class SimpleArray<T> implements Iterable<Object> {
 
     @SuppressWarnings("unchecked")
     public T get(int index) {
+        Objects.checkIndex(index, position);
         return (T) arr[index];
     }
 
@@ -64,7 +64,7 @@ public class SimpleArray<T> implements Iterable<Object> {
 
             @Override
             public boolean hasNext() {
-                return pos < arr.length && arr[pos] != null;
+                return pos < position;
             }
 
             @Override
