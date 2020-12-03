@@ -17,6 +17,7 @@ public class SimpleArrayN<T> implements Iterable<T> {
         if (container.length <= position) {
             size = container.length * 2;
             container = Arrays.copyOf(container, size);
+            container[position] = model;
 
         } else {
             container[position] = model;

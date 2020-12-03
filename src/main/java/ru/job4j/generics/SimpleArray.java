@@ -30,16 +30,13 @@ public class SimpleArray<T> implements Iterable<Object> {
         return (T) arr[index];
     }
 
-    public boolean remove(int index) {
+    public T remove(int index) {
         Objects.checkIndex(index, position);
-        Object[] dest = new Object[position - 1];
-        if (index < arr.length) {
-            System.arraycopy(arr, index + 1, dest, 0, position - index-1);
-            arr = dest;
-            position--;
-            return true;
-        } else
-            return false;
+        T value = (T) arr[index];
+        System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
+        arr[arr.length - 1] = null;
+        position--;
+        return value;
     }
 
     @SuppressWarnings("unchecked")
