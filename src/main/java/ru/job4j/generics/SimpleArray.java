@@ -30,7 +30,7 @@ public class SimpleArray<T> implements Iterable<Object> {
         return (T) arr[index];
     }
 
-    public T remove(int index) {
+    public T remove(int index)  {
         Objects.checkIndex(index, position);
         T value = (T) arr[index];
         System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
