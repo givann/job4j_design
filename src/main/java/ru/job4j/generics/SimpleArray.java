@@ -35,6 +35,7 @@ public class SimpleArray<T> implements Iterable<Object> {
         T value = (T) arr[index];
         System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
         arr[arr.length - 1] = null;
+        System.out.println(arr.length+" <---Size Arr");
         position--;
         return value;
     }
