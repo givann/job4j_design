@@ -17,12 +17,12 @@ public class SimpleArrayN<T> implements Iterable<T> {
         if (container.length <= position) {
             size = container.length * 2;
             container = Arrays.copyOf(container, size);
-            position++;
-            modCount++;
+
         } else {
-            container[position++] = model;
-            modCount++;
+            container[position] = model;
         }
+        position++;
+        modCount++;
     }
 
     @SuppressWarnings("unchecked")
