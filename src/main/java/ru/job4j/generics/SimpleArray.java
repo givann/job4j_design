@@ -35,7 +35,6 @@ public class SimpleArray<T> implements Iterable<Object> {
         T value = (T) arr[index];
         System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
         arr[arr.length - 1] = null;
-        System.out.println(arr.length+" <---Size Arr");
         position--;
         return value;
     }
@@ -72,23 +71,5 @@ public class SimpleArray<T> implements Iterable<Object> {
                 return arr[pos++];
             }
         };
-    }
-
-    public static void main(String[] args) {
-        SimpleArray<Integer> dd = new SimpleArray<>(6);
-        dd.add(1);
-        dd.add(2);
-        dd.add(3);
-        dd.add(4);
-        dd.add(5);
-        dd.add(6);
-        Iterator<Object> iter = dd.iterator();
-
-        dd.remove(1);
-
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-
     }
 }

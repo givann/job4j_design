@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SimpleArrayTest extends TestCase {
+public class SimpleArrayTest {
 
     @Test
     public void testAdd() {
@@ -38,9 +38,9 @@ public class SimpleArrayTest extends TestCase {
         curr.add(1);
         curr.add(2);
         curr.remove(1);
-        SimpleArray<Integer> exp = new SimpleArray<>(1);
+        SimpleArray<Integer> exp = new SimpleArray<>(2);
         exp.add(1);
-        assertThat(curr, is(exp));
+        assertThat(curr.toString(), is(exp.toString()));
 
 
     }
