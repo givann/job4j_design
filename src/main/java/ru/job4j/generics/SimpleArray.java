@@ -31,11 +31,10 @@ public class SimpleArray<T> implements Iterable<Object> {
     }
 
     public boolean remove(int index) {
-        Object[] dest = new Object[arr.length - 1];
         Objects.checkIndex(index, position);
+        Object[] dest = new Object[position - 1];
         if (index < arr.length) {
-            System.arraycopy(arr, 0, dest, 0, index);
-            System.arraycopy(arr, index + 1, dest, index, arr.length - (index + 1));
+            System.arraycopy(arr, index + 1, dest, 0, position - index-1);
             arr = dest;
             position--;
             return true;
@@ -75,5 +74,23 @@ public class SimpleArray<T> implements Iterable<Object> {
                 return arr[pos++];
             }
         };
+    }
+
+    public static void main(String[] args) {
+        SimpleArray<Integer> dd = new SimpleArray<>(6);
+        dd.add(1);
+        dd.add(2);
+        dd.add(3);
+        dd.add(4);
+        dd.add(5);
+        dd.add(6);
+        Iterator<Object> iter = dd.iterator();
+
+        dd.remove(1);
+
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+
     }
 }

@@ -1,13 +1,10 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleArrayN<T> implements Iterable<T> {
     private Object[] container;
-    private final int size = 10;
+    private int size = 10;
     private int position;
     private int modCount = 0;
 
@@ -18,16 +15,14 @@ public class SimpleArrayN<T> implements Iterable<T> {
 
     public void add(T model) {
         if (container.length <= position) {
-            Object[] dest = new Object[size * 2];
-            System.arraycopy(container, 0, dest, 0, position - 1);
-            container = dest;
+            size = container.length * 2;
+            container = Arrays.copyOf(container, size);
             position++;
             modCount++;
         } else {
             container[position++] = model;
             modCount++;
         }
-        Objects.checkIndex(0, position);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,29 +51,6 @@ public class SimpleArrayN<T> implements Iterable<T> {
                 }
                 return (T) container[posIter++];
             }
-
         };
-    }
-
-    public static void main(String[] args) {
-        SimpleArrayN<String> strings = new SimpleArrayN<>();
-        strings.add("Str");
-        strings.add("S");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("Str1");
-        strings.add("luck");
-
-
-        System.out.println(strings.get(0));
-        System.out.println(strings.get(1));
-        System.out.println(strings.get(11));
-
     }
 }

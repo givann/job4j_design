@@ -40,7 +40,7 @@ public class SimpleArrayTest extends TestCase {
         curr.remove(1);
         SimpleArray<Integer> exp = new SimpleArray<>(1);
         exp.add(1);
-        assertThat(exp.toString(), is(curr.toString()));
+        assertThat(curr, is(exp));
 
 
     }
