@@ -55,4 +55,17 @@ public class SimpleArrayN<T> implements Iterable<T> {
             }
         };
     }
+
+    public static void main(String[] args) {
+        SimpleArrayN<String> ss = new SimpleArrayN<>();
+        ss.add("ee");
+        ss.add("ee");
+        ss.add("ee");
+        ss.add("ee");
+
+        Iterator<String> iter = ss.iterator();
+        while (iter.hasNext()){
+            System.out.println(iter.next());
+        }
+    }
 }
