@@ -2,6 +2,7 @@ package ru.job4j.collection;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class MyLinkedList<E> implements Iterable<E> {
     Node<E> first;
@@ -25,42 +26,52 @@ public class MyLinkedList<E> implements Iterable<E> {
         Node<E> ml = last;
         Node<E> nn = new Node<>(ml, value, null);
         last = nn;
-        if (ml == null)
+        if (ml == null) {
             first = nn;
-        else
+        } else {
             ml.next = nn;
+        }
         size++;
         modCount++;
     }
 
     E get(int index) {
+        Objects.checkIndex(0, size);
+        Node<E> nd = first;
         E e = null;
         int tmcCount = 0;
-        for (Node<E> x = first; x != null; x = x.next) {
+        for (int x = 0; x <= index; x++) {
             if (index == tmcCount) {
-                e = x.item;
-                tmcCount++;
-            } else {
-                tmcCount++;
+                e = nd.item;
             }
+            nd = nd.next;
+            tmcCount++;
         }
         return e;
     }
-    private class IterFLL implements Iterator<E>{
+
+    private class IterFLL implements Iterator<E> {
         private int posIter = 0;
         int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
             if (modCount != expectedModCount)
-                    throw new ConcurrentModificationException();
+                throw new ConcurrentModificationException();
             return posIter < size;
         }
 
         @Override
         public E next() {
-            return get(posIter++);
+            posIter++;
+            return getNext().item;
         }
+    }
+
+    public Node<E> getNext() {
+        Node<E> newN = first;
+        first = first.next;
+        return newN;
     }
 
     @Override
@@ -76,12 +87,9 @@ public class MyLinkedList<E> implements Iterable<E> {
         mmm.add("ERa");
         mmm.add("ERu");
 
-        while (iter.hasNext()){
+
+        while (iter.hasNext()) {
             System.out.println(iter.next());
         }
-
-//        System.out.println(mmm.get(0));
-//        System.out.println(mmm.get(1));
-//        System.out.println(mmm.get(2));
     }
 }
