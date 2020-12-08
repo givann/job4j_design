@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class MyLinkedList<E> implements Iterable<E> {
-    Node<E> first;
-    Node<E> last;
+    private Node<E> first;
+    private Node<E> last;
     private int modCount = 0;
     private int size = 0;
 
@@ -35,24 +35,20 @@ public class MyLinkedList<E> implements Iterable<E> {
         modCount++;
     }
 
-    E get(int index) {
-        Objects.checkIndex(0, size);
+    private E get(int index) {
+        Objects.checkIndex(index, size);
         Node<E> nd = first;
-        E e = null;
         int tmcCount = 0;
         for (int x = 0; x <= index; x++) {
-            if (index == tmcCount) {
-                e = nd.item;
-            }
             nd = nd.next;
-            tmcCount++;
         }
-        return e;
+        return nd.item;
     }
 
     private class IterFLL implements Iterator<E> {
         private int posIter = 0;
         int expectedModCount = modCount;
+        Node<E> current = first;
 
         @Override
         public boolean hasNext() {
@@ -63,33 +59,18 @@ public class MyLinkedList<E> implements Iterable<E> {
 
         @Override
         public E next() {
-            posIter++;
-            return getNext().item;
+            if (hasNext()) {
+                posIter++;
+                E value = current.item;
+                current = current.next;
+                return value;
+            }
+            return null;
         }
-    }
-
-    public Node<E> getNext() {
-        Node<E> newN = first;
-        first = first.next;
-        return newN;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new IterFLL();
-    }
-
-    public static void main(String[] args) {
-        MyLinkedList<String> mmm = new MyLinkedList<>();
-        Iterator<String> iter = mmm.iterator();
-
-        mmm.add("ER");
-        mmm.add("ERa");
-        mmm.add("ERu");
-
-
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
     }
 }
