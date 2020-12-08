@@ -48,16 +48,19 @@ public class MyLinkedList<E> implements Iterable<E> {
         return nd.item;
     }
 
-    private E deleteFst() {
-        Node<E> tmp = first;
+    public E deleteFst() {
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
         E data = first.item;
-        tmp = tmp.next;
+        Node<E> tmp = first.next;
+        first.item = null;
         first.next = null;
+        first = tmp;
         if (tmp == null)
             setLast(null);
         else
             tmp.prev = null;
-        first = tmp;
         size--;
         modCount++;
         return data;
