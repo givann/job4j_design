@@ -1,11 +1,14 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class MyLinkedList<E> implements Iterable<E> {
     private Node<E> first;
+
+    public void setLast(Node<E> last) {
+        this.last = last;
+    }
+
     private Node<E> last;
     private int modCount = 0;
     private int size = 0;
@@ -45,8 +48,27 @@ public class MyLinkedList<E> implements Iterable<E> {
         return nd.item;
     }
 
+    private E deleteFst() {
+        Node<E> tmp = first;
+        E data = first.item;
+        tmp = tmp.next;
+        first.next = null;
+        if (tmp == null)
+            setLast(null);
+        else
+            tmp.prev = null;
+        first = tmp;
+        size--;
+        modCount++;
+        return data;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new IterFLL();
+    }
+
     private class IterFLL implements Iterator<E> {
-        private int posIter = 0;
         int expectedModCount = modCount;
         Node<E> current = first;
 
@@ -54,23 +76,43 @@ public class MyLinkedList<E> implements Iterable<E> {
         public boolean hasNext() {
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
-            return posIter < size;
+            return current != null;
         }
 
         @Override
         public E next() {
-            if (hasNext()) {
-                posIter++;
-                E value = current.item;
-                current = current.next;
-                return value;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
             }
-            return null;
+            E value = current.item;
+            current = current.next;
+            return value;
         }
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new IterFLL();
+    public static void main(String[] args) {
+        MyLinkedList<String> cc = new MyLinkedList<>();
+
+        cc.add("Asus");
+        cc.add("Dell");
+        cc.add("Apple");
+
+        for (String s : cc) {
+            System.out.println(s);
+        }
+
+        System.out.println();
+
+        cc.deleteFst();
+        cc.deleteFst();
+        cc.deleteFst();
+
+        Iterator<String> nIt = cc.iterator();
+
+        while (nIt.hasNext()) {
+            System.out.println(nIt.next());
+        }
     }
+
+
 }
