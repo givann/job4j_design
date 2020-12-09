@@ -2,7 +2,7 @@ package ru.job4j.collection;
 
 import java.util.*;
 
-public class MyLinkedList<E> implements Iterable<E> {
+public class ForwardLinked<E> implements Iterable<E> {
     private Node<E> first;
 
     public void setLast(Node<E> last) {
@@ -42,7 +42,7 @@ public class MyLinkedList<E> implements Iterable<E> {
         Objects.checkIndex(index, size);
         Node<E> nd = first;
         int tmcCount = 0;
-        for (int x = 0; x <= index; x++) {
+        for (int x = 0; x < index; x++) {
             nd = nd.next;
         }
         return nd.item;
@@ -94,7 +94,7 @@ public class MyLinkedList<E> implements Iterable<E> {
     }
 
     public static void main(String[] args) {
-        MyLinkedList<String> cc = new MyLinkedList<>();
+        ForwardLinked<String> cc = new ForwardLinked<>();
 
         cc.add("Asus");
         cc.add("Dell");
