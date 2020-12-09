@@ -7,6 +7,9 @@ public class SimpleStack<T> {
         return forwardLinked.deleteLast();
     }
 
+    public T popFst() {
+        return forwardLinked.deleteFst();
+    }
     public void push(T value) {
         forwardLinked.add(value);
     }

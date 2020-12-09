@@ -128,16 +128,6 @@ public class ForwardLinked<E> implements Iterable<E> {
             System.out.println(s);
         }
 
-        System.out.println();
-
-
-        System.out.println();
-        cc.deleteFst();
-        cc.deleteFst();
-        cc.deleteFst();
-        for (String s : cc) {
-            System.out.println(s);
-        }
     }
 
 
