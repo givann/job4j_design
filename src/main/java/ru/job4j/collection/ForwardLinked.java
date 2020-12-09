@@ -9,6 +9,10 @@ public class ForwardLinked<E> implements Iterable<E> {
         this.last = last;
     }
 
+    public void setFirst(Node<E> first) {
+        this.first = first;
+    }
+
     private Node<E> last;
     private int modCount = 0;
     private int size = 0;
@@ -57,10 +61,30 @@ public class ForwardLinked<E> implements Iterable<E> {
         first.item = null;
         first.next = null;
         first = tmp;
-        if (tmp == null)
+        if (tmp == null) {
             setLast(null);
-        else
+        } else {
             tmp.prev = null;
+        }
+        size--;
+        modCount++;
+        return data;
+    }
+
+    public E deleteLast() {
+        if (last == null) {
+            throw new NoSuchElementException();
+        }
+        E data = last.item;
+        Node<E> tmp = last.prev;
+        last.item = null;
+        last.prev = null;
+        last = tmp;
+        if (tmp == null) {
+            setFirst(null);
+        } else {
+            tmp.next = null;
+        }
         size--;
         modCount++;
         return data;
@@ -106,14 +130,13 @@ public class ForwardLinked<E> implements Iterable<E> {
 
         System.out.println();
 
-        cc.deleteFst();
-        cc.deleteFst();
-        cc.deleteFst();
 
-        Iterator<String> nIt = cc.iterator();
-
-        while (nIt.hasNext()) {
-            System.out.println(nIt.next());
+        System.out.println();
+        cc.deleteFst();
+        cc.deleteFst();
+        cc.deleteFst();
+        for (String s : cc) {
+            System.out.println(s);
         }
     }
 
