@@ -7,11 +7,12 @@ public class SimpleStack<T> {
         return forwardLinked.deleteLast();
     }
 
-    public T popFst() {
-        return forwardLinked.deleteFst();
-    }
     public void push(T value) {
         forwardLinked.add(value);
+    }
+
+    public boolean isEmpty() {
+        return forwardLinked.getSize() == 0;
     }
 
     public static void main(String[] args) {
@@ -21,8 +22,11 @@ public class SimpleStack<T> {
         stringSimpleStack.push("Dell");
         stringSimpleStack.push("Apple");
 
-        stringSimpleStack.pop();
-        stringSimpleStack.pop();
-        stringSimpleStack.pop();
+        System.out.println(stringSimpleStack.pop());
+        System.out.println(stringSimpleStack.pop());
+        System.out.println(stringSimpleStack.pop());
+
     }
+
+
 }

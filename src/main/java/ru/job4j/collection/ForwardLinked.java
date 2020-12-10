@@ -17,6 +17,10 @@ public class ForwardLinked<E> implements Iterable<E> {
     private int modCount = 0;
     private int size = 0;
 
+    public int getSize() {
+        return size;
+    }
+
     private static class Node<E> {
         E item;
         Node<E> next;
@@ -127,6 +131,8 @@ public class ForwardLinked<E> implements Iterable<E> {
         for (String s : cc) {
             System.out.println(s);
         }
+        System.out.println();
+
 
     }
 
