@@ -11,6 +11,10 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
         return size;
     }
 
+    public Node<T> getHead() {
+        return head;
+    }
+
     public void add(T value) {
         Node<T> node = new Node<T>(value, null);
         if (head == null) {
@@ -26,23 +30,27 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
         size++;
     }
 
-    public Node<T> tail() {
-        Node<T> tail = head;
-        Node<T> out = null;
-        while (tail.next != null) {
-            out = new Node<>(tail.value, out);
-            tail = tail.next;
-        }
-        return out;
-    }
-
     public void revert() {
-        ForwardLinkedSingle<T> forwardLinkedSingle = new ForwardLinkedSingle<>();
-        for (int i = 0; i < size; i++) {
-            forwardLinkedSingle.add(tail().value);
+        Node<T> fst = null;
+        Node<T> cur = head;
+        Node<T> lst = head.next;
+        if (size > 1) {
+            for (int i = 0; i < size; i++) {
+                cur.next = fst;
+                fst = cur;
+                cur = lst;
+                if (i == size - 1) {
+                    head = fst;
+                    return;
+                } else {
+                    lst = lst.next;
+                }
+            }
+        } else return;
 
-        }
+
     }
+
 
     @Override
     public Iterator<T> iterator() {
@@ -82,12 +90,16 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
 
         aa.add(4);
         aa.add(2);
-        aa.add(11);
+//        aa.add(11);
 
         aa.revert();
+
 
         for (Integer integer : aa) {
             System.out.println(integer);
         }
+//        for (Integer integer : aa) {
+//            System.out.println(integer);
+//        }
     }
 }
