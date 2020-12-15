@@ -31,27 +31,38 @@ public class ListUtils {
     }
 
     public static <T> List<T> removeIf(List<T> list, Predicate<T> filter) {
-        return list.stream()
-                .filter(filter)
-                .collect(Collectors.toList());
+        ListIterator<T> lIter = list.listIterator();
+        while (lIter.hasNext()) {
+            T t = lIter.next();
+            if (!filter.test(t)) {
+                lIter.remove();
+            }
+        }
+        return list;
     }
 
     public static <T> List<T> replaceIf(List<T> list, Predicate<T> filter, T value) {
-        return null;
+        ListIterator<T> lIter = list.listIterator();
+        while (lIter.hasNext()) {
+            T t = lIter.next();
+            if (filter.test(t)) {
+                lIter.set(value);
+            }
+        }
+        return list;
+
     }
 
     public static <T> List<T> removeAll(List<T> list, List<T> elements) {
-        return null;
+        ListIterator<T> lIter = list.listIterator();
+        ListIterator<T> eIter = elements.listIterator();
+        while (eIter.hasNext()) {
+            T t = lIter.next();
+            T tD = eIter.next();
+            if (t == tD) {
+                lIter.remove();
+            }
+        }
+        return list;
     }
-
-    public static void main(String[] args) {
-
-
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 3, 5, 7));
-        ListUtils.addBefore(input, 1, 2);
-        List<Integer> ii = ListUtils.removeIf(input, value -> value > 5);
-        System.out.println(ii);
-
-    }
-
 }
