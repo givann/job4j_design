@@ -34,7 +34,11 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
         Node<T> fst = null;
         Node<T> cur = head;
         Node<T> lst = head.next;
-        if (size > 1) {
+        if (head == null || head.next == null) { // пустой список или список с одним элементов не имеет смысла переворачивать
+            return;
+        } else if (size < 2) {
+            return;
+        } else
             for (int i = 0; i < size; i++) {
                 cur.next = fst;
                 fst = cur;
@@ -46,9 +50,6 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
                     lst = lst.next;
                 }
             }
-        } else return;
-
-
     }
 
 
@@ -88,9 +89,8 @@ public class ForwardLinkedSingle<T> implements Iterable<T> {
     public static void main(String[] args) {
         ForwardLinkedSingle<Integer> aa = new ForwardLinkedSingle<>();
 
-        aa.add(4);
-        aa.add(2);
-//        aa.add(11);
+
+        aa.add(11);
 
         aa.revert();
 
