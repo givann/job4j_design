@@ -27,10 +27,18 @@ public class SimpleArrayN<T> implements Iterable<T> {
         return container;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     @SuppressWarnings("unchecked")
     public T get(int index) {
         Objects.checkIndex(index, position);
         return (T) container[index];
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
@@ -54,18 +62,5 @@ public class SimpleArrayN<T> implements Iterable<T> {
                 return (T) container[posIter++];
             }
         };
-    }
-
-    public static void main(String[] args) {
-        SimpleArrayN<String> ss = new SimpleArrayN<>();
-        ss.add("ee");
-        ss.add("ee");
-        ss.add("ee");
-        ss.add("ee");
-
-        Iterator<String> iter = ss.iterator();
-        while (iter.hasNext()){
-            System.out.println(iter.next());
-        }
     }
 }
