@@ -9,13 +9,11 @@ public class SimpleQueue<T> {
     }
 
     public T poll() {
-        while (!in.isEmpty()) {
-            out.push(in.pop());
+        if (out.isEmpty()) {
+            while (!in.isEmpty()) {
+                out.push(in.pop());
+            }
         }
-        T t = out.pop();
-        while (!out.isEmpty()) {
-            in.push(out.pop());
-        }
-        return t;
+        return out.pop();
     }
 }
