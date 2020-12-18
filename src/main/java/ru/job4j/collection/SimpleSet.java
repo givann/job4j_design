@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
     SimpleArrayN<E> simpleArrayN = new SimpleArrayN<>();
@@ -13,11 +14,11 @@ public class SimpleSet<E> implements Iterable<E> {
             simpleSize++;
         } else {
             for (int i = 0; i < simpleSize; i++) {
-                if (simpleArrayN.get(i).equals(e)) {
+                if (Objects.equals(simpleArrayN.get(i), e)) {
                     count++;
                 }
             }
-            if (count == 0){
+            if (count == 0) {
                 simpleArrayN.add(e);
                 simpleSize++;
             }
@@ -29,17 +30,16 @@ public class SimpleSet<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int pos = 0;
-            int sizz = simpleArrayN.getPosition();
+            Iterator<E> iterator = simpleArrayN.iterator();
 
             @Override
             public boolean hasNext() {
-                return pos < sizz;
+                return iterator.hasNext();
             }
 
             @Override
             public E next() {
-                return simpleArrayN.get(pos++);
+                return iterator.next();
             }
         };
     }
