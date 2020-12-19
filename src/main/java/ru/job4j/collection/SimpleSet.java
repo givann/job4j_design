@@ -7,29 +7,32 @@ public class SimpleSet<E> implements Iterable<E> {
     SimpleArrayN<E> simpleArrayN = new SimpleArrayN<>();
     private int simpleSize = 0;
 
-    private boolean checkS(E e, E e1) {
-        return Objects.equals(e, e1);
+    private boolean contains(E e) {
+        int count =0;
+        if (simpleSize==0){
+            simpleSize++;
+            return false;
+        }
+        for (int i = 0; i < simpleSize; i++) {
+            if (Objects.equals(simpleArrayN.get(i), e)) {
+                count++;
+                return true;
+            }
+        }
+        if (count == 0) {
+            simpleSize++;
+            return false;
+        }
+        return false;
     }
 
     public void add(E e) {
-        int count = 0;
-        if (simpleSize == 0) {
-            simpleArrayN.add(e);
-            simpleSize++;
-        } else {
-            for (int i = 0; i < simpleSize; i++) {
-                if (checkS(simpleArrayN.get(i),e)) {
-                    count++;
-                }
-            }
-            if (count == 0) {
-                simpleArrayN.add(e);
-                simpleSize++;
-            }
-
+        if (contains(e)) {
+            return;
         }
-
+        simpleArrayN.add(e);
     }
+
 
     @Override
     public Iterator<E> iterator() {
