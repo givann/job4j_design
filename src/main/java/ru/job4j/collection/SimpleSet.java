@@ -5,25 +5,16 @@ import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
     SimpleArrayN<E> simpleArrayN = new SimpleArrayN<>();
-    private int simpleSize = 0;
 
     private boolean contains(E e) {
-        int count =0;
-        if (simpleSize==0){
-            simpleSize++;
-            return false;
-        }
-        for (int i = 0; i < simpleSize; i++) {
-            if (Objects.equals(simpleArrayN.get(i), e)) {
-                count++;
-                return true;
+    boolean res = false;
+        for (E e1 : simpleArrayN) {
+            if (Objects.equals(e1, e)){
+                res = true;
+                break;
             }
         }
-        if (count == 0) {
-            simpleSize++;
-            return false;
-        }
-        return false;
+        return res;
     }
 
     public void add(E e) {
@@ -36,19 +27,7 @@ public class SimpleSet<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            Iterator<E> iterator = simpleArrayN.iterator();
-
-            @Override
-            public boolean hasNext() {
-                return iterator.hasNext();
-            }
-
-            @Override
-            public E next() {
-                return iterator.next();
-            }
-        };
+        return simpleArrayN.iterator();
     }
 
     public static void main(String[] args) {
