@@ -19,10 +19,10 @@ public class Tree<E> implements SimpleTree<E> {
             Node<E> prntNod = prnt.get();
             if (findBy(child).isEmpty()) {
                 rsl = prntNod.getChildren().add(new Node<>(child));
+            } else {
+                rsl = false;
             }
-            rsl = false;
         }
-
         return rsl;
     }
 
