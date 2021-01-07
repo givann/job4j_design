@@ -1,8 +1,11 @@
 package ru.job4j.collection;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Tree<E> implements SimpleTree<E> {
     private final Node<E> root;
@@ -27,14 +30,13 @@ public class Tree<E> implements SimpleTree<E> {
         return rsl;
     }
 
-    @Override
-    public Optional<Node<E>> findBy(E value) {
+    public Optional<Node<E>> find(Predicate<Node<E>> predicate) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.value.equals(value)) {
+            if (predicate.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
@@ -43,15 +45,29 @@ public class Tree<E> implements SimpleTree<E> {
         return rsl;
     }
 
+
     public boolean isBinary() {
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            if (el.getChildren().size() <= 2) {
-                return true;
-            }
-        }
-        return false;
+        return find(p -> p.getChildren().size() > 2).isEmpty();
+
     }
+
+    public Optional<Node<E>> findBy(E value) {
+        return find(p -> p.getValue().equals(value));
+    }
+
+
+    public static void main(String[] args) {
+        Tree<Integer> integerTree = new Tree<>(1);
+
+        integerTree.add(1, 2);
+        integerTree.add(1, 3);
+        integerTree.add(1, 4);
+//        integerTree.add(1, 46);
+
+//        System.out.println(integerTree.isBinary());
+
+        System.out.println(integerTree.findBy(4));
+
+    }
+
 }
