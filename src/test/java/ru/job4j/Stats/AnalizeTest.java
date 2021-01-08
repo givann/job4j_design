@@ -54,16 +54,12 @@ public class AnalizeTest extends TestCase {
         prev.add(new User(1, "Tom"));
         prev.add(new User(2, "Sam"));
         prev.add(new User(3, "John"));
-        prev.add(new User(4, "Same"));
-        prev.add(new User(5, "Saman"));
         List<User> cur = new ArrayList<>();
         cur.add(new User(1, "Tom"));
-        cur.add(new User(2, "Samm"));
+        cur.add(new User(2, "Sam"));
         cur.add(new User(3, "Samy"));
-        cur.add(new User(4, "Same"));
-        cur.add(new User(5, "Saman"));
         Analize analize = new Analize();
-        int expRes = 2;
+        int expRes = 1;
         int actRes = analize.diff(prev,cur).getChanged();
         assertThat(actRes,is(expRes));
     }
