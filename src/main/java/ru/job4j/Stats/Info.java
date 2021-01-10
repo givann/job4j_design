@@ -3,6 +3,7 @@ package ru.job4j.Stats;
 public class Info {
     private int added;
     private int changed;
+    private int deleted;
 
     public int getAdded() {
         return added;
@@ -29,6 +30,4 @@ public class Info {
         this.deleted = deleted;
         return deleted;
     }
-
-    private int deleted;
 }
