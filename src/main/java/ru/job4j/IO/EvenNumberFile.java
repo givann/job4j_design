@@ -17,7 +17,6 @@ public class EvenNumberFile {
                 } else {
                     System.out.println("Odd");
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
