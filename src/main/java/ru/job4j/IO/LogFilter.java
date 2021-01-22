@@ -13,15 +13,13 @@ public class LogFilter {
             String line = reader.readLine();
             while (line != null) {
                 list.add(line);
+                if (line.contains("404")){
+                    newl.add(line);
+                }
                 line = reader.readLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        for (String s : list) {
-            if (s.contains("404")) {
-                newl.add(s);
-            }
         }
         return newl;
     }
