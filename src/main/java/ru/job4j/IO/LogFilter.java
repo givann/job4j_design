@@ -23,10 +23,7 @@ public class LogFilter {
                 newl.add(s);
             }
         }
-        if (newl.size() != 0) {
-            return newl;
-        }
-        return null;
+        return newl;
     }
 
     public static void main(String[] args) {
